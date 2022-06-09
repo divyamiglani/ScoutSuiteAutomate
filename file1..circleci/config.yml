@@ -15,8 +15,14 @@ orbs:
               name: setup scoutsuite
               command: |
                 pip install scoutsuite
-                scout aws --no-browser
+                python setup.py aws --no-browser
                 echo SUCCESS: ScoutSuite run successfully.
+      validate:
+        steps:
+          - run:
+              name: validate-scoutsuite-result
+              command: |
+                python validate.py
 jobs:
   scoutsuite-audit:
     executor: scoutsuite/default
@@ -28,6 +34,7 @@ jobs:
     - scoutsuite/start
     - store_artifacts:
         path: scoutsuite-report
+    - scoutsuite/validate
 workflows:  
   scoutsuite:
     triggers:
