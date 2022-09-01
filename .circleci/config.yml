@@ -6,8 +6,9 @@ executors:
 orbs:
   aws-cli: circleci/aws-cli@1.0.0
   scoutsuite:
-    executors:
-      default: aws-cli/default
+    executor: node/default
+
+   #   default: aws-cli/default
     commands:
       start:
         steps:
